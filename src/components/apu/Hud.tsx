@@ -7,7 +7,12 @@ export function Hud({ fragments, total = 5 }: { fragments: number; total?: numbe
   const [muted, setM] = useState(isMuted());
   const [secret, setSecret] = useState<string | null>(null);
 
-  useEffect(() => onMuteChange(setM), []);
+  useEffect(() => {
+    const off = onMuteChange(setM);
+    return () => {
+      off();
+    };
+  }, []);
 
   const secrets = [
     "psst… she has no idea this exists 🤫",
