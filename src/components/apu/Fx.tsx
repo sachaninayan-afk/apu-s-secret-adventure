@@ -251,18 +251,20 @@ export function NeonButton({
   onClick,
   className,
   variant = "violet",
-  ...rest
+  ariaLabel,
 }: {
   children: ReactNode;
   onClick?: () => void;
   className?: string;
   variant?: "violet" | "pink" | "ghost";
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "className">) {
+  ariaLabel?: string;
+}) {
   return (
     <motion.button
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
       onClick={onClick}
+      aria-label={ariaLabel}
       className={cn(
         "glass relative overflow-hidden rounded-full px-7 py-3.5 font-mono text-xs tracking-[0.25em] uppercase transition-colors",
         variant === "violet" && "text-[var(--neon-violet)] hover:text-foreground glow-ring",
@@ -270,10 +272,8 @@ export function NeonButton({
         variant === "ghost" && "text-muted-foreground hover:text-foreground",
         className,
       )}
-      {...rest}
     >
       <span className="relative z-10">{children}</span>
-      <span className="absolute inset-0 -translate-x-full bg-[image:var(--gradient-neon)] opacity-25 transition-transform duration-700 hover:translate-x-0" />
     </motion.button>
   );
 }
