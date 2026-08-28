@@ -138,7 +138,7 @@ export function startMusic(mood: "dark" | "warm" | "party" = "dark") {
     warm: [130.81, 196, 261.63, 329.63],
     party: [146.83, 220, 293.66, 440],
   };
-  const oscs = (chords[mood] ?? chords.dark!).map((f, i) => {
+  const oscs = (chords[mood] ?? chords['dark']!).map((f, i) => {
     const o = c.createOscillator();
     const g = c.createGain();
     o.type = i % 2 ? "sine" : "triangle";
